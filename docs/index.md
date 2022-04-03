@@ -1,1 +1,4 @@
-# Docs
+---
+home: true
+---
+
