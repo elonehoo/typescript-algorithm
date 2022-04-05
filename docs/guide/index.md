@@ -62,7 +62,7 @@ function algorithm(N:number):number{
 对于以下代码，无论 aa 取多大，都与输入数据大小 NN 无关，因此时间复杂度仍为 O(1)O(1) 。
 
 ```typescript
-function algorithm2(N:number):number{
+function algorithm(N:number):number{
     let count:number = 0
     const a:number = 10000
 
@@ -79,4 +79,151 @@ function algorithm2(N:number):number{
 
 循环运行次数与 NN 大小呈线性关系，时间复杂度为 O(N)O(N) 。
 
+```typescript
+function algorithm(N:number):number{
+    let count:number = 0
+    for(var i = 0; i < N ; i++){
+        count++
+    }
+    return count
+}
+```
 
+对于以下代码，虽然是两层循环，但第二层与 NN 大小无关，因此整体仍与 NN 呈线性关系。
+
+```typescript
+function algorithm(N:number):number{
+    let count:number = 0
+    let a:number = 10000
+    for(var i = 0; i < N ; i++){
+        for(var j = 0; j < a ; j++){
+            count++
+        }
+    }
+    return count
+}
+```
+
+![step3](../.vitepress/public/guide/index/step3.png)
+
+#### 平方 O(N^2)O(N2) ：
+
+两层循环相互独立，都与 NN 呈线性关系，因此总体与 NN 呈平方关系，时间复杂度为 O(N^2)O(N 2) 。
+
+```typescript
+function algorithm(N:number):number{
+    let count:number = 0
+    for(var i = 0 ; i < N ;i++){
+        for(var j = 0 ; j < N ; j++){
+            count++
+        }
+    }
+    return count
+}
+```
+
+以「冒泡排序」为例，其包含两层独立循环：
+
+1. 第一层复杂度为 O(N)O(N) ；
+2. ​第二层平均循环次数为 N/2 ,复杂度为 O(N)O(N) ，推导过程如下
+O(N/2)=O(1/2)O(N)=O(1)O(N)=O(N)
+
+因此，冒泡排序的总体时间复杂度为 O(N^2)，代码如下所示。
+
+```typescript
+function algorithm(nums:number[]):number[]{
+    let N:number = nums.length
+    for(var i = 0; i < N - 1; i++){
+        for(var j = 0; j < N - 1; j++){
+            if (nums[j] > nums[j + 1]) {
+                var tmp = nums[j];
+                nums[j] = nums[j + 1];
+                nums[j + 1] = tmp;
+            }
+        }
+    }
+    return nums
+}
+```
+
+![step4](../.vitepress/public/guide/index/step4.png)
+
+#### 指数 O(2^N)O(2 ：
+
+生物学科中的 “细胞分裂” 即是指数级增长。初始状态为 11 个细胞，分裂一轮后为 22 个，分裂两轮后为 44 个，……，分裂 NN 轮后有 2^N 个细胞。
+
+算法中，指数阶常出现于递归，算法原理图与代码如下所示。
+
+```typescript
+function algorithm(N:number):number{
+    if(N <= 0){
+        return 1
+    }
+    let count_1:number = algorithm(N - 1)
+    let count_2:number = algorithm(N - 1);
+    return count_1 + count_2
+}
+```
+
+![step5](../.vitepress/public/guide/index/step5.png)
+
+#### 阶乘 O(N!)：
+
+阶乘阶对应数学上常见的 “全排列” 。即给定 NN 个互不重复的元素，求其所有可能的排列方案，则方案数量为：
+
+N × (N -1) × (N - 2) × … × 2 × 1 = N!
+
+如下图与代码所示，阶乘常使用递归实现，算法原理：第一层分裂出 NN 个，第二层分裂出 N - 1N−1 个，…… ，直至到第 NN 层时终止并回溯。
+
+```typescript
+function algorithm(N:number):number{
+    if(N <= 0){
+        return 1
+    }
+    let count:number = 0
+    for(var i = 0 ; i < N ; i++){
+        count += algorithm(N - 1)
+    }
+    return count
+}
+```
+
+![step6](../.vitepress/public/guide/index/step6.png)
+
+#### 对数 O(logN)：
+
+对数阶与指数阶相反，指数阶为 “每轮分裂出两倍的情况” ，而对数阶是 “每轮排除一半的情况” 。对数阶常出现于「二分法」、「分治」等算法中，体现着 “一分为二” 或 “一分为多” 的算法思想。
+
+设循环次数为 mm ，则输入数据大小 NN 与 2 ^ m
+呈线性关系，两边同时取 log2 对数，则得到循环次数 m 与 log2N 呈线性关系，即时间复杂度为 O(logN) 。
+
+```typescript
+function algorithm(N:number):number{
+    let count = 0
+    let i = N
+    while(i > 1){
+        i = i / 2
+        count++
+    }
+    return count
+}
+```
+
+如以下代码所示，对于不同 a 的取值，循环次数 m 与 log_aN 呈线性关系 ，时间复杂度为 O(log_aN) 。而无论底数 a 取值，时间复杂度都可记作 O(logN) ，根据对数换底公式的推导如下：
+
+O(log_aN)= O(log_2N)/O(log_2a)=O(logN)
+
+```typescript
+function algorithm(N:number):number{
+    let count:number = 0
+    let i = N
+    let a:number = 3
+    while(i > 1){
+        i = i / a
+        count++
+    }
+    return count
+}
+```
+
+>如下图所示，为二分查找的时间复杂度示意图，每次二分将搜索区间缩小一半。
