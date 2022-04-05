@@ -227,3 +227,25 @@ function algorithm(N:number):number{
 ```
 
 >如下图所示，为二分查找的时间复杂度示意图，每次二分将搜索区间缩小一半。
+
+#### 线性对数 O(NlogN)：
+
+两层循环相互独立，第一层和第二层时间复杂度分别为 O(logN) 和 O(N) ，则总体时间复杂度为 O(NlogN) ；
+
+```typescript
+function algorithm11(N:number):number{
+    let count:number = 0
+    let i = N
+    while(i > 1){
+        i = i / 2
+        for(var j = 0 ; j < N ; j++){
+            count++
+        }
+    }
+    return count
+}
+```
+
+线性对数阶常出现于排序算法，例如「快速排序」、「归并排序」、「堆排序」等，其时间复杂度原理如下图所示。
+
+![step7](../.vitepress/public/guide/index/step7.png)

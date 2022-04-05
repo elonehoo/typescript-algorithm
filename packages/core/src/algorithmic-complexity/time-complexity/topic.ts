@@ -174,3 +174,18 @@ export function algorithm10(N:number):number{
     }
     return count
 }
+
+/**
+ * 两层循环相互独立，第一层和第二层时间复杂度分别为 O(\log N)O(logN) 和 O(N)O(N) ，则总体时间复杂度为 O(N \log N)O(NlogN) ；
+ */
+export function algorithm11(N:number):number{
+    let count:number = 0
+    let i = N
+    while(i > 1){
+        i = i / 2
+        for(var j = 0 ; j < N ; j++){
+            count++
+        }
+    }
+    return count
+}
