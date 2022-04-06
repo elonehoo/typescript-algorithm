@@ -71,3 +71,51 @@ export function cuttingRope(n: number): number {
   res *= n
   return res
 }
+
+/**
+ * 统计一个数字在排序数组中出现的次数。
+ * 
+ * 示例 1:
+ * 输入: nums = [5,7,7,8,8,10], target = 8
+ * 输出: 2
+ * 
+ * 示例 2:
+ * 输入: nums = [5,7,7,8,8,10], target = 6
+ * 输出: 0
+ * 
+ * 提示：
+ * 0 <= nums.length <= 105
+ * -109 <= nums[i] <= 109
+ * nums 是一个非递减数组
+ * -109 <= target <= 109
+ * 
+ * @param nums 排序数组
+ * @param target 一个数字
+ */
+export function search(nums: number[], target: number): number {
+  /**
+  let count:number = 0
+  for (let num of nums){
+    if(num === target){
+      count++
+    }
+  }
+  return count
+   */
+
+  return search_helper(nums,target) - search_helper(nums,target - 1)
+};
+
+function search_helper(nums:number[],target:number):number{
+  let i:number = 0
+  let j:number = nums.length - 1
+  while(i <= j){
+    const m = i + ((j - i) >> 1)
+    if(nums[m] <= target){
+      i = m + 1
+    }else{
+      j = m - 1
+    }
+  }
+  return i
+}
