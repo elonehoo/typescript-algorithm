@@ -1,5 +1,5 @@
 import { test } from 'vitest'
-import {isStraight,cuttingRope,search,myPow} from '../../../packages/core/src/algorithmic-complexity/time-complexity/contact'
+import {isStraight,cuttingRope,search,myPow,fib} from '../../../packages/core/src/algorithmic-complexity/time-complexity/contact'
 
 test.skip('text start',()=>{
   console.log('text start')
@@ -17,6 +17,10 @@ test.skip('search',()=>{
   console.log('search',search([5,7,7,8,8,10],8))
 })
 
-test('my pow',()=>{
+test.skip('my pow',()=>{
   console.log('my pow',myPow(2.00000,10))
+})
+
+test('fib',()=>{
+  console.log('fib',fib(5))
 })
