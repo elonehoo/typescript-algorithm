@@ -191,3 +191,126 @@ export function fib(n: number): number {
   }
   return a
 }
+
+
+class ListNode{
+  val: number
+  next: ListNode | null
+  constructor(val?:number , next?: ListNode|null){
+    this.val = (val===undefined ? 0 : val)
+    this.next = (next===undefined ? null : next)
+  }
+}
+
+/**
+ * 定义一个函数，输入一个链表的头节点，反转该链表并输出反转后链表的头节点。
+ * 
+ * 示例:
+ * 输入: 1->2->3->4->5->NULL
+ * 输出: 5->4->3->2->1->NULL
+ * 
+ * 限制：
+ * 0 <= 节点个数 <= 5000
+ * 
+ * @param head 链表
+ * @returns 链表
+ */
+export function reverseList(head: ListNode | null): ListNode | null {
+   let cur:ListNode | null = head
+   let pre:ListNode | null = null
+
+    while(cur !== null){
+      const temp:ListNode | null = cur.next
+      cur.next = pre
+      pre = cur
+      cur = temp
+    }
+
+   return pre
+};
+
+/**
+ * 输入一个非负整数数组，把数组里所有数字拼接起来排成一个数，打印能拼接出的所有数字中最小的一个。
+ * 
+ * 示例 1:
+ * 输入: [10,2]
+ * 输出: "102"
+ * 示例 2:
+ * 输入: [3,30,34,5,9]
+ * 输出: "3033459"
+ * 
+ * 提示:
+ * 0 < nums.length <= 100
+ * 
+ * 说明:
+ * 输出结果可能非常大，所以你需要返回一个字符串而不是整数
+ * 拼接起来的数字可能会有前导 0，最后结果不需要去掉前导 0
+ * 
+ * @param nums 一个非负整数数组
+ * @returns 拼接起来的数字
+ */
+export function minNumber(nums: number[]): string {
+  return nums.sort((a, b) => Number(String(a) + String(b)) < Number(String(b) + String(a)) ? -1 : 1).map(e => String(e)).join('');
+};
+
+/**
+ * 在数组中的两个数字，如果前面一个数字大于后面的数字，则这两个数字组成一个逆序对。输入一个数组，求出这个数组中的逆序对的总数。
+ * 
+ * 示例 1:
+ * 输入: [7,5,6,4]
+ * 输出: 5
+ * 
+ * 限制：
+ * 0 <= 数组长度 <= 50000
+ * 
+ * @param nums 数组
+ * @return 逆序对的总数
+ */
+export function reversePairs(nums: number[]): number {
+  if (nums.length === 0) return 0;
+  let ans = 0;
+
+  let left = 0;
+  let right = nums.length - 1;
+
+  mergeSort(left, right);
+
+  function mergeSort(left:number, right:number) {
+      if (left >= right) return;
+      let mid = left + ((right - left) >> 1);
+      mergeSort(left, mid);
+      mergeSort(mid + 1, right);
+
+      merge(left, mid, right);
+  }
+
+  function merge(lo:number, mid:number, hi:number) {
+      let temp = [];
+      let index = 0;
+      let i = lo;
+      let j = mid + 1;
+
+      while(i <= mid && j <= hi) {
+          if (nums[i] <= nums[j]) {
+              temp[index++] = nums[i++];
+          } else {
+              temp[index++] = nums[j++];
+              ans += (mid - i) + 1;
+          }
+      }
+
+      while(i <= mid) {
+          temp[index++] = nums[i++];
+      }
+
+      while(j <= hi) {
+          temp[index++] = nums[j++];
+      }
+
+      for (let k = 0; k < temp.length; k++) {
+          nums[lo + k] = temp[k];
+      }
+  }
+
+  return ans;
+};
