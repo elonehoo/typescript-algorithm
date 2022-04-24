@@ -343,7 +343,6 @@ export function reversePairs(nums: number[]): number {
 export function verifyPostorder(postorder: number[]): boolean {
   return recur(postorder, 0, postorder.length - 1)
 };
-
 function recur(postorder:number[],i:number,j:number):boolean{
   if(i >= j){ return true }
   let p:number = 0
@@ -360,3 +359,48 @@ function recur(postorder:number[],i:number,j:number):boolean{
 
 }
 
+/**
+ * 剑指 Offer 48. 最长不含重复字符的子字符串
+ * 
+ * 请从字符串中找出一个最长的不包含重复字符的子字符串，计算该最长子字符串的长度。
+ * 
+ * 示例 1:
+ * 输入: "abcabcbb"
+ * 输出: 3 
+ * 解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
+ * 
+ * 示例 2:
+ * 输入: "bbbbb"
+ * 输出: 1
+ * 解释: 因为无重复字符的最长子串是 "b"，所以其长度为 1。
+ * 
+ * 示例 3:
+ * 输入: "pwwkew"
+ * 输出: 3
+ * 解释: 因为无重复字符的最长子串是 "wke"，所以其长度为 3。
+ *      请注意，你的答案必须是 子串 的长度，"pwke" 是一个子序列，不是子串。
+ * 
+ * 提示：s.length <= 40000
+ * 
+ * @param s 字符串
+ * @returns 最长子字符串的长度
+ */
+export function lengthOfLongestSubstring(s: string): number {
+  let i = 0
+  let j = 0
+  let max = 0
+  while(i < s.length) { 
+      for(let k = j; k < i; k++) { 
+          if (s[k] !== s[i]) {
+              continue
+          }
+          else {
+              max = Math.max(max, i - j)
+              j = k + 1
+          }
+      }
+      i++
+  }
+  return Math.max(max, i - j)
+
+};
