@@ -10,7 +10,7 @@
     "docs": "npm -C docs run dev"
   },
   "devDependencies": {
-    "typescript": "^4.5.4",
+    "typescript": "^5.6.3",
     "vite": "^2.9.0",
     "vitest": "^0.8.3"
   }
