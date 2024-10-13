@@ -11,6 +11,6 @@
   "author": "Elone Hoo <huchengyea@163.com>",
   "license": "MIT",
   "dependencies": {
-    "vitepress": "^0.22.3"
+    "vitepress": "^1.4.1"
   }
 }
