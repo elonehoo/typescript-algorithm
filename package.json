@@ -2,7 +2,7 @@
   "name": "ts-projects",
   "version": "0.0.1",
   "description": "Initialized TypeScript Project",
-  "packageManager": "pnpm@6.28.0",
+  "packageManager": "pnpm@9.12.2",
   "author": "Elone Hoo <huchengyea@163.com>",
   "type": "module",
   "license": "MIT",
