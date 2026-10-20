@@ -25,6 +25,7 @@ export function algorithm(N:number):number{
     const a:number = 1
     const b:number = 2
     const x:number = a * b + N
+    void x
 
     return 1
 }
@@ -36,6 +37,7 @@ export function algorithm(N:number):number{
  * @returns 计算操作结构
  */
 export function algorithm2(N:number):number{
+    void N
     let count:number = 0
     const a:number = 10000
 
