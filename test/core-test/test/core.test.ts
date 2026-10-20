@@ -1,5 +1,5 @@
 import { test } from 'vitest'
-import {isStraight,cuttingRope,search,myPow,fib,reverseList} from '../../../packages/core/src/algorithmic-complexity/time-complexity/contact'
+import {isStraight,cuttingRope,search,myPow,fib} from '../../../packages/core/src/algorithmic-complexity/time-complexity/contact'
 
 test.skip('text start',()=>{
   console.log('text start')
