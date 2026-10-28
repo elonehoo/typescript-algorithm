@@ -2,7 +2,7 @@
   "name": "ts-projects",
   "version": "0.0.1",
   "description": "Initialized TypeScript Project",
-  "packageManager": "pnpm@12.14.0",
+  "packageManager": "pnpm@12.16.1",
   "author": "Elone Hoo <huchengyea@163.com>",
   "type": "module",
   "license": "MIT",
@@ -11,7 +11,7 @@
   },
   "devDependencies": {
     "typescript": "^7.0.2",
-    "vite": "^8.3.4",
+    "vite": "^8.3.5",
     "vitest": "^5.0.5"
   }
 }
